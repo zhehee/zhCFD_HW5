@@ -116,20 +116,26 @@ u(x) = \sin^2(\pi x)
     \end{align}
 \end{enumerate}
 
-对第2步压力泊松方程，我们采用带有松弛因子的高斯赛德尔迭代法进行求解：
-\begin{equation}
-    p^{*}_{i,j} = \frac{1}{4} \left(
-        p^{n}_{i+1,j} + p^{n+1}_{i-1,j} + p^{n}_{i,j+1} + p^{n+1}_{i,j-1}
-        - \Delta t \left( \frac{u^*_{i+1,j} - u^*_{i-1,j}}{2\Delta x} + \frac{v^*_{i,j+1} - v^*_{i,j-1}}{2\Delta y} \right)
-    \right)
-\end{equation}
-\begin{equation}
-    p^{n+1}_{i,j} = \alpha p^{*}_{i,j} + (1 - \alpha) p^{n}_{i,j}
-\end{equation}
-其中，$\alpha$为松弛因子，通常取值在1到2之间。松弛因子可以加速收敛。
+对第2步压力泊松方程，我们采用JOCIBI迭代法进行求解：
+\begin{enumerate}
+    \item 初始化压力场$p^{n+1}$为零场
+    \item 迭代计算压力场，直到收敛：
+    \begin{align}
+        p^{n+1}_{i,j} &= \frac{1}{4} \left(
+            p^{n+1}_{i+1,j} + p^{n+1}_{i-1,j} + p^{n+1}_{i,j+1} + p^{n+1}_{i,j-1}
+        \right) - \frac{\Delta t}{4} \left(
+            \frac{u^*_{i+1,j} - u^*_{i-1,j}}{2\Delta x}
+            + \frac{v^*_{i,j+1} - v^*_{i,j-1}}{2\Delta y}
+        \right)
+    \end{align}
+    \item 迭代停止条件：当压力场的变化量小于设定的阈值时，停止迭代
+    \item 更新压力场
+    \item 返回第2步
+\end{enumerate}
 
 
 \section{代码实现}
+模拟流场的代码如下：
 
 \newpage   
 \section{结果分析}
