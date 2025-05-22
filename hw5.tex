@@ -145,6 +145,27 @@ u(x) = \sin^2(\pi x)
 \lstinputlisting[language=Python, caption={流线图和速度剖面的绘制}, firstline=55, lastline=90]{code.py}
 \newpage   
 \section{结果分析}
+通过以上代码生成的流线图和速度剖面图如下：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{1_streamlines.pdf}
+    \caption{流线图}
+    \label{fig:streamline}
+\end{figure}
+由流场图可以看出，主涡的涡心位置在$(0.5, 0.6)$左右，在左下角和右下角各有一个二次涡。其形成原因主要是流动边界层分离和粘性耗散效应。由于模拟条件雷诺数$Re$约等于1000，流动较为平稳，流线图中没有明显的三次涡旋结构。随着雷诺数的增加，流动会变得更加复杂，可能会出现更强的涡旋结构和不稳定性。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{2_horizontal_profile.pdf}
+    \caption{y=0.5速度水平剖面图}
+    \label{fig:velocity_profile}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{3_vertical_profile.pdf}
+    \caption{x=0.5速度垂直剖面图}
+    \label{fig:velocity_profile}
+\end{figure}
+由速度剖面图可以看出，流速在上边界处达到最大值，随着距离上边界的增加，流速逐渐减小。流速在y=0.5处的水平剖面图中，流速在x=0.5处达到最大值，随着x的增加，流速逐渐减小。流速在x=0.5处的垂直剖面图中，流速在y=0.5处达到最大值，随着y的增加，流速逐渐减小。
 
 
 \section{AI工具使用说明表}

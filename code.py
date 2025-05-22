@@ -67,8 +67,8 @@ def plot_analysis_results(u, v):
 
     #  水平中线速度剖面
     plt.figure(figsize=(10, 4))
-    mid_y = N // 2
-    absolute_velocityy = np.sqrt(u[mid_y, :] ** 2 + v[mid_y, :] ** 2)
+    mid_y = int(N / 2)
+    absolute_velocityy = np.sqrt(u[:, mid_y] ** 2 + v[:, mid_y] ** 2)
     plt.plot(x, absolute_velocityy, 'r-', linewidth=2)
     plt.xlabel('x coordinate')
     plt.ylabel('Velocity')
@@ -79,8 +79,8 @@ def plot_analysis_results(u, v):
 
     #  垂直中线速度剖面
     plt.figure(figsize=(6, 8))
-    mid_x = N // 2
-    absolute_velocityx= np.sqrt(u[:, mid_x] ** 2 + v[:, mid_x] ** 2)
+    mid_x = int(N / 2)
+    absolute_velocityx= np.sqrt(u[mid_x, :] ** 2 + v[mid_x, :] ** 2)
     plt.plot(absolute_velocityx, y, 'b-', linewidth=2)
     plt.ylabel('y coordinate')
     plt.xlabel('Velocity')
