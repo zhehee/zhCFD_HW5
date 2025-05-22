@@ -137,6 +137,12 @@ u(x) = \sin^2(\pi x)
 \section{代码实现}
 模拟流场的代码如下：
 
+首先是基本参数设定和边界条件设定，对本题正方形区域，我们不妨设置$\delta x = \delta y = 0.01$，即网格数为100*100。速度边界条件满足除上边界外其他边界为0，压力边界条件为法向梯度0。
+\lstinputlisting[language=Python, caption={基础参数设定和边界条件}, firstline=1, lastline=52]{code.py}
+然后是主程序求解流场速度分布：采用的差分算法就是我们在算法原理里提到的投影法。值得一提的是迭代收敛由两次，一次是由$u^{n}$到$u^{n+1}$的差值来判断，另一次是由压力场的变化量来判断。我们在代码中设置了一个阈值，当两次迭代都满足收敛条件时，才停止迭代。
+\lstinputlisting[language=Python, caption={主程序求解流场速度分布}, firstline=93, lastline=168]{code.py}
+最后是流线图的绘制和速度剖面的绘制。流线图的绘制采用了matplotlib库中的streamplot函数，速度剖面的绘制采用了matplotlib库中的plot函数。
+\lstinputlisting[language=Python, caption={流线图和速度剖面的绘制}, firstline=55, lastline=90]{code.py}
 \newpage   
 \section{结果分析}
 

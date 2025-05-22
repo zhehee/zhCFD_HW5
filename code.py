@@ -53,19 +53,19 @@ def apply_pressure_bc(p):
 
 
 def plot_analysis_results(u, v):
-    """可视化分析结果"""
+    #可视化分析结果
     x = np.linspace(0, 1, N)
     y = np.linspace(0, 1, N)
     X, Y = np.meshgrid(x, y)
 
-    # 1. 流线图
+    #  流线图
     plt.figure(figsize=(10, 8))
     plt.streamplot(X, Y, u.T, v.T, density=2, color='lightgray')
     plt.title('Vortex Core Locations')
     plt.savefig('1_streamlines.pdf', bbox_inches='tight', dpi=300)
     plt.close()
 
-    # 2. 水平中线速度剖面
+    #  水平中线速度剖面
     plt.figure(figsize=(10, 4))
     mid_y = N // 2
     absolute_velocityy = np.sqrt(u[mid_y, :] ** 2 + v[mid_y, :] ** 2)
@@ -77,7 +77,7 @@ def plot_analysis_results(u, v):
     plt.savefig('2_horizontal_profile.pdf', bbox_inches='tight', dpi=300)
     plt.close()
 
-    # 3. 垂直中线速度剖面
+    #  垂直中线速度剖面
     plt.figure(figsize=(6, 8))
     mid_x = N // 2
     absolute_velocityx= np.sqrt(u[:, mid_x] ** 2 + v[:, mid_x] ** 2)
@@ -124,11 +124,11 @@ for iter in range(max_iter):
         p_old = p.copy()
 
         p[1:-1, 1:-1] = (
-                                (p[2:, 1:-1] + p[:-2, 1:-1] + p[1:-1, 2:] + p[1:-1, :-2])
-                                - h ** 2 / (4 * dt) * (
-                                        (u[2:, 1:-1] - u[:-2, 1:-1]) / (2 * h) +
-                                        (v[1:-1, 2:] - v[1:-1, :-2]) / (2 * h)
-                                )
+                            (p[2:, 1:-1] + p[:-2, 1:-1] + p[1:-1, 2:] + p[1:-1, :-2])
+                            - h ** 2 / (4 * dt) * (
+                                    (u[2:, 1:-1] - u[:-2, 1:-1]) / (2 * h) +
+                                    (v[1:-1, 2:] - v[1:-1, :-2]) / (2 * h)
+                            )
                         ) / 4
         # 应用边界条件
         p = apply_pressure_bc(p)
